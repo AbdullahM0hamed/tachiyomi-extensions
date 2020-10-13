@@ -44,7 +44,7 @@ class Mangasee : HttpSource() {
     override val supportsLatest = true
 
     // Used for thumbnail images
-    var coverUrlPlaceHolder: String? = null
+    var coverUrlPlaceHolder: String = ""
 
     override val client: OkHttpClient = network.cloudflareClient.newBuilder()
         .connectTimeout(1, TimeUnit.MINUTES)
