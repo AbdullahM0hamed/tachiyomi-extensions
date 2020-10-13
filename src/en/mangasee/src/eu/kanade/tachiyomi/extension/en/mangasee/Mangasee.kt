@@ -43,6 +43,9 @@ class Mangasee : HttpSource() {
 
     override val supportsLatest = true
 
+    // Used for thumbnail images
+    var coverUrlPlaceHolder: String
+
     override val client: OkHttpClient = network.cloudflareClient.newBuilder()
         .connectTimeout(1, TimeUnit.MINUTES)
         .readTimeout(1, TimeUnit.MINUTES)
@@ -76,6 +79,7 @@ class Mangasee : HttpSource() {
 
     // don't use ";" for substringBefore() !
     private fun directoryFromResponse(response: Response): String {
+        coverUrlPlaceholder = response.asJsoup().select("img[ng-src]").attr("ng-src")
         return response.asJsoup().select("script:containsData(MainFunction)").first().data()
             .substringAfter("vm.Directory = ").substringBefore("vm.GetIntValue").trim()
             .replace(";", " ")
@@ -95,7 +99,7 @@ class Mangasee : HttpSource() {
             mangas.add(
                 SManga.create().apply {
                     title = directory[i]["s"].string
-                    url = "/manga/${directory[i]["i"].string}"
+                    url = coverUrlPlaceholder.replace("{{Result.i}}", directory[i]["i"].string)
                     thumbnail_url = "https://cover.mangabeast01.com/cover/${directory[i]["i"].string}.jpg"
                 }
             )
