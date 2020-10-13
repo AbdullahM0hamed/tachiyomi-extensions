@@ -10,6 +10,7 @@ build_script:
   - rm -rf all ar de es fr id it ja ko pt ru th tr vi zh
   - cd en
   - rm -rf boommanga clonemanga comicastle comicextra comicpunch dilbert dynasty eggporncomics existentialcomics explosm gunnerkriggcourt guya hbrowse hentai2read hentaifox hentainexus hiveworks honkaiimpact3 killsixbilliondemons latisbooks madokami manga1s mangadog mangadoom mangaeden mangafast mangafreak mangahasu mangahere mangahub mangajar mangakatana mangalinkz mangamainac mangamutiny mangaowl mangapark mangareader mangarockes mangasail mangatown manhwatime manmanga merakiscans myhentaicomics myhentaigallery naniscans nineanime oglaf patchfriday perveden pururin questionablecontent readcomiconline readjump readm readmangatoday readmanhwa schlockmercenary silentmangaaudition sleepypandascans swordscomic tapastic timelessleaf tsumino vgperson vizshonenjump webcomics wutopia xkcd
+  - cd ../..
   - gradlew.bat assemble
 artifacts:
   - path: src/en/*/build/outputs/apk/debug/*apk
