@@ -40,7 +40,7 @@ class MangaLife : HttpSource() {
 
     override val supportsLatest = true
 
-    var coverUrlPlaceholder: String
+    var coverUrlPlaceholder: String? = null
 
     override val client: OkHttpClient = network.cloudflareClient.newBuilder()
         .connectTimeout(1, TimeUnit.MINUTES)
