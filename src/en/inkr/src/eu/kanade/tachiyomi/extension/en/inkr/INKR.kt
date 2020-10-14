@@ -315,7 +315,7 @@ class INKR : HttpSource() {
         val body = RequestBody.create(jsonType, jsonString)
 
         val headersModified = headersBuilder()
-            .add("cf-ipcountry", Locale.getDefault().toString().replace("_", "-")
+            .add("cf-ipcountry", Locale.getDefault().toString().replace("_", "-"))
             .build()
 
         return POST(apiUrl, headersModified, body)
