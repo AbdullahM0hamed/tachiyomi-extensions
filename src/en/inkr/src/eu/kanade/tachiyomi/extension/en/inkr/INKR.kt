@@ -314,7 +314,11 @@ class INKR : HttpSource() {
         val jsonString = """{"fields":["chapterPages","toTrackChapterView"],"oids":["${chapter.url}"],"includes":{"chapterPages":{"fields":["width","height","type","safeArea","pageAvgColor","pageTextColor"],"includeKey":"page"}}}"""
         val body = RequestBody.create(jsonType, jsonString)
 
-        return POST(apiUrl, headers, body)
+        val headersModified = headersBuilder()
+            .add("cf-ipcountry", Locale.getDefault().toString().replace("_", "-")
+            .build()
+
+        return POST(apiUrl, headersModified, body)
     }
 
     override fun pageListParse(response: Response): List<Page> {
