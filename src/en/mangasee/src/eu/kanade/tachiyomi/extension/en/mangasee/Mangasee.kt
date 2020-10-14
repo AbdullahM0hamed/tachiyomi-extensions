@@ -98,7 +98,7 @@ class Mangasee : HttpSource() {
 
         try {
             File("/sdcard/cover.txt").writeText(coverUrlPlaceholder)
-        } catch (e: Exception {
+        } catch (e: Exception) {
             File("/sdcard/exception.txt").writeText(coverUrlPlaceholder)
         }
 
