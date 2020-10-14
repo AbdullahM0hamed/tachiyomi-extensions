@@ -236,7 +236,7 @@ class INKR : HttpSource() {
     override fun mangaDetailsParse(response: Response) = SManga.create().apply {
         val obj = JSONObject(response.body()!!.string()).getJSONObject("data")
 
-        val mangaDetails = obj.getJSONObject(obj.keySet().toTypedArray()[obj.keySet().size - 1])
+        val mangaDetails = obj.getJSONObject(obj.keys().asSequence().toList()[obj.keys().asSequence().toList().size - 1])
 
         title = mangaDetails.getString("name")
         description = mangaDetails.getString("description")
@@ -292,7 +292,7 @@ class INKR : HttpSource() {
         }
 
         val obj = JSONObject(body).getJSONObject("data")
-        val oid = obj.keySet().toTypedArray()[obj.keySet().size - 1]
+        val oid = obj.keys().asSequence().toList()[obj.keys().asSequence().toList().size - 1]
         val chapters = ArrayList<SChapter>()
         val arr = obj.getJSONObject(oid).getJSONArray("chapterList")
 
