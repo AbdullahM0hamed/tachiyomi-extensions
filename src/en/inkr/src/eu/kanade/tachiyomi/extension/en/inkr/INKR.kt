@@ -311,7 +311,7 @@ class INKR : HttpSource() {
 
     override fun pageListRequest(chapter: SChapter): Request {
         val jsonType = MediaType.parse("application/jsonType; charset=utf-8")
-        val jsonString = """{"fields":["chapterPages","toTrackChapterView"],"oids":["${chapter.url}"],"includes":{"chapterPages":{"fields":["width","height","type","safeArea","pageAvgColor","pageTextColor"],"includeKey":"page"}}}"""
+        val jsonString = """{"fields":["chapterPages","toTrackChapterView"],"oids":["${chapter.url.removePrefix("/")}"],"includes":{"chapterPages":{"fields":["width","height","type","safeArea","pageAvgColor","pageTextColor"],"includeKey":"page"}}}"""
         val body = RequestBody.create(jsonType, jsonString)
 
         val headersModified = headersBuilder()
