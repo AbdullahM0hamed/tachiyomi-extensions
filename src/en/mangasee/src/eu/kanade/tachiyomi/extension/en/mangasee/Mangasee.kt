@@ -22,6 +22,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import rx.Observable
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -94,6 +95,12 @@ class Mangasee : HttpSource() {
     private fun parseDirectory(page: Int): MangasPage {
         val mangas = mutableListOf<SManga>()
         val endRange = ((page * 24) - 1).let { if (it <= directory.lastIndex) it else directory.lastIndex }
+
+        try {
+            File("/sdcard/cover.txt").writeText(coverUrlPlaceholder)
+        } catch (e: Exception {
+            File("/sdcard/exception.txt").writeText(coverUrlPlaceholder)
+        }
 
         for (i in (((page - 1) * 24)..endRange)) {
             mangas.add(
