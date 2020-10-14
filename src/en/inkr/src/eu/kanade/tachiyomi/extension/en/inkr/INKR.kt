@@ -322,7 +322,8 @@ class INKR : HttpSource() {
     }
 
     override fun pageListParse(response: Response): List<Page> {
-        val obj = JSONObject(response.body()!!.string()).getJSONArray("data")
+        val respJson = JSONObject(response.body()!!.string()).getJSONObject("data")
+        val obj = respJson.getJSONObject(respJson.keys().asSequence().toList().getString(0)).getJSONArray("chapterPages")
         val pages = ArrayList<Page>()
         for (i in 0 until obj.length()) {
             pages.add(Page(i, "", obj.getJSONObject(i).getString("url") + "/w1600.ikc"))
