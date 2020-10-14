@@ -309,7 +309,13 @@ class INKR : HttpSource() {
         return chapters
     }
 
-    override fun pageListRequest(chapter: SChapter) = GET(apiUrl + chapter.url, headers)
+    override fun pageListRequest(chapter: SChapter): Request {
+        val jsonType = MediaType.parse("application/jsonType; charset=utf-8")
+        val jsonString = """{"fields":["chapterPages","toTrackChapterView"],"oids":["${chapter.url}"],"includes":{"chapterPages":{"fields":["width","height","type","safeArea","pageAvgColor","pageTextColor"],"includeKey":"page"}}}"""
+        val body = RequestBody.create(jsonType, jsonString)
+
+        return POST(apiUrl, headers, body)
+    }
 
     override fun pageListParse(response: Response): List<Page> {
         val obj = JSONObject(response.body()!!.string()).getJSONArray("data")
